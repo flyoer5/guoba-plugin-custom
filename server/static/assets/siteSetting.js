@@ -1,0 +1,1 @@
+const GITHUB_URL="https://github.com/flyoer5/guoba-plugin-custom",GITEE_URL="https://github.com/flyoer5/guoba-plugin-custom",DOC_URL="https://github.com/flyoer5/guoba-plugin-custom",SITE_URL="https://github.com/flyoer5/guoba-plugin-custom";export{DOC_URL as D,GITHUB_URL as G,SITE_URL as S,GITEE_URL as a};
