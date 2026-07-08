@@ -8,32 +8,9 @@ import {_paths} from '#guoba.platform'
  * 通过本地仓库解析插件列表
  */
 export async function parsePluginsIndexByLocal() {
-  const pluginMaps = {}
-  const repo = await GitUtils.getPluginsIndex()
-  if (!repo) {
-    logger.error('[Guoba] 获取本地插件列表仓库失败，请删除`' + GitUtils.repoPath + '`目录后重启 -1')
-    return pluginMaps
-  }
-  if (!fs.existsSync(repo.directory)) {
-    logger.error('[Guoba] 获取本地插件列表仓库失败，请删除`' + GitUtils.repoPath + '`目录后重启 -2')
-    return pluginMaps
-  }
-  // 重置并拉取最新插件列表
-  await repo.reset()
-  await repo.pull()
-  // 读取插件列表
-  const mdNames = ['README.md', 'Function-Plugin.md', 'Game-Plugin.md']
-  for (let mdName of mdNames) {
-    const mdPath = path.join(repo.directory, mdName)
-    if (!fs.existsSync(repo.directory)) {
-      logger.error(`[Guoba] ${mdName}不存在，如遇此问题请提交issue请求适配`)
-      continue
-    }
-    const text = fs.readFileSync(mdPath, 'UTF-8')
-    const parseResult = parsePluginList(text)
-    Object.assign(pluginMaps, parseResult)
-  }
-  return pluginMaps
+  // 跳过：本机 git 无法访问 GitHub
+  logger.mark('[Guoba] 本地插件列表已跳过（GitHub 不可达），使用远程 raw 获取')
+  return {}
 }
 
 /**
